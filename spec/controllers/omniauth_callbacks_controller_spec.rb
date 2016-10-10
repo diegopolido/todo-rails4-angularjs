@@ -37,31 +37,6 @@ describe OmniauthCallbacksController, "handle facebook authentication callback" 
   end
   
   describe "#logged in user" do
-    context "when user don't have facebook authentication" do
-      before(:each) do
-        stub_env_for_omniauth
-
-        user = User.create!(:email => "user@example.com", :password => "my_secret")
-        sign_in user
-
-        get :facebook
-      end
-
-      it "should add facebook authentication to current user" do
-        user = User.where(:email => "user@example.com").first
-        user.should_not be_nil
-        fb_authentication = User.where(:provider => "facebook").first
-        fb_authentication.should_not be_nil
-        fb_authentication.uid.should == "1234"
-      end
-
-      it { should be_user_signed_in }
-
-      it { response.should redirect_to root_path }
-      
-      it { flash[:notice].should == "Successfully authenticated from Facebook account."}
-    end
-    
     context "when user already connect with facebook" do
       before(:each) do
         stub_env_for_omniauth
