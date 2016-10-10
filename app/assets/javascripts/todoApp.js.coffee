@@ -1,14 +1,18 @@
-todoApp = angular.module('todoApp', ['ngResource', 'ngRoute', 'mk.editablespan', 'ui.sortable'])
+todoApp = angular.module('todoApp', ['ngResource', 'ngRoute', 'mk.editablespan', 'ui.sortable', 'djds4rce.angular-socialshare'])
 
 todoApp.config ($httpProvider) ->
   authToken = $("meta[name=\"csrf-token\"]").attr("content")
   $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = authToken
 
+todoApp.run ($FB) ->
+  $FB.init('346393672364439')
+
 todoApp.config ($routeProvider, $locationProvider) ->
   $locationProvider.html5Mode true
   $routeProvider.when '/', redirectTo: '/dashboard'
   $routeProvider.when '/dashboard', templateUrl: '/templates/dashboard.html', controller: 'DashboardController'
-  $routeProvider.when '/task_lists/:list_id', templateUrl: '/templates/task_list.html', controller: 'TodoListController'   
+  $routeProvider.when '/task_lists/:list_id', templateUrl: '/templates/task_list.html', controller: 'TodoListController'
+  $routeProvider.when '/task_lists/:list_id/share', templateUrl: '/templates/share.html', controller: 'TodoListController'   
 
 # Makes AngularJS work with turbolinks.
 $(document).on 'page:load', ->

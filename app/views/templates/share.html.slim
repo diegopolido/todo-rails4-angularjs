@@ -1,0 +1,12 @@
+.ng-cloak(ng-init="init()")
+  div.panel.panel-info.task-list
+    div.panel-heading
+      span
+        ' {{list.name}}     
+    ul.list-group(ui-sortable="sortableOptions" ng-model="list.tasks" ui-sortable-ext="sortableEnabled")
+      li.list-group-item(ng-repeat="task in list.tasks | orderBy:sortMethod" ng-class="{completed: task.completed, draggable: sortMethod == 'priority'}")
+        .task-description
+          editablespan(model="task.description" on-ready="taskEdited(task)" input-class="form-control")
+        .task-due-date(ng-show="task.due_date")
+          small
+            ' Due date: {{task.due_date}}    

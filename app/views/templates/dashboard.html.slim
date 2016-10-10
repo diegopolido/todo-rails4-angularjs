@@ -9,7 +9,8 @@
     ul.list-group
       li.list-group-item(ng-repeat="list in lists")
         button.btn.btn-danger.btn-xs.pull-right(type="button" ng-click="deleteList(list, $index)")
-          span.glyphicon.glyphicon-ban-circle        
+          span.glyphicon.glyphicon-ban-circle
+        .pull-right.fb-share-button data-href="http://localhost:3000/task_lists/{{list.id}}/share" data-layout="button_count" 
         a(href="/task_lists/{{list.id}}") 
           ' {{list.name}} ({{list.tasks.length}})      
 

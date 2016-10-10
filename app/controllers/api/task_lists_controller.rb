@@ -9,6 +9,10 @@ class Api::TaskListsController < Api::BaseController
     render json: task_list
   end
 
+  def share
+    render json: task_list
+  end
+
   def create
     list = current_user.task_lists.create!(safe_params)
     render json: list
