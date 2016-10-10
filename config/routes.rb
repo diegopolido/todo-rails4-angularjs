@@ -1,5 +1,5 @@
 Todo::Application.routes.draw do
-  devise_for :users  
+  devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
 
   namespace :api, defaults: {format: :json} do
     devise_scope :user do
